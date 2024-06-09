@@ -8,7 +8,7 @@ export function useNotes (): MenuItemType[] {
   const result = []
   const stack = [...notePath]
   while (!result.length && stack.length) {
-    const current = stack.pop()!
+    const current = stack.pop()! as MenuItemType
     if (current.path === activePath) {
       result.push(...current.children || [])
     } else if (current.children) {
