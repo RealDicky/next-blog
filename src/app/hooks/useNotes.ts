@@ -3,7 +3,7 @@ import notePath from '../../../notePath.json'
 import { MenuItemType } from '../components/menu/types'
 
 export function useNotes (): MenuItemType[] {
-  const activePath = '.' + location.pathname
+  const activePath = '.' + decodeURIComponent(location.pathname)
 
   const result = []
   const stack = [...notePath] as MenuItemType[]
