@@ -1,10 +1,10 @@
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import { MenuItemType } from './types'
 import { MenuContext } from './menuContext'
 import Link from 'next/link'
+
 const MenuItem: FC<{menuItem: MenuItemType}> = (props) => {
   const { menuItem } = props
-  if (!menuItem.children) return
   const { activePath, setActive } = useContext(MenuContext)!
 
   const isActive: (menu: MenuItemType) => boolean = menu => {
@@ -18,22 +18,20 @@ const MenuItem: FC<{menuItem: MenuItemType}> = (props) => {
     setActive(menuItem.path)
   }
 
-  useEffect(() => {
-    setActive('.' + location.pathname)
-  })
-
   return (
-    <div className='w-32 cursor-pointer flex' onMouseEnter={() => setShowSub(true)} onMouseLeave={() => setShowSub(false)}>
+    <div className='w-24 bg-white cursor-pointer flex' onMouseEnter={() => setShowSub(true)} onMouseLeave={() => setShowSub(false)}>
       <div className='justify-center items-center flex-1 relative'>
-        <Link href={menuItem.path.slice(1)} className={`p-2 hover:bg-slate-300 text-center ${isActive(menuItem) ? 'border-b-2 border-slate-500' : ''}`} onClick={handleClickMenu}>{menuItem.name}</Link>
+        <Link className={`py-2 px-4 hover:bg-slate-300 text-center w-full ${isActive(menuItem) ? 'border-b-2 border-slate-500' : ''}`} href={menuItem.path} onClick={handleClickMenu}>{menuItem.name}</Link>
         <div
-          className='absolute w-auto top-9'
+          className='absolute w-auto top-[2.75rem]'
           style={{
             display: showSub ? 'block' : 'none'
           }}>
-          {menuItem.children?.map((subMenu) => {
-            return (<MenuItem key={subMenu.name} menuItem={subMenu}/>)
-          })}
+          {
+            menuItem.children?.map((subMenu) => {
+              return (<MenuItem key={subMenu.name} menuItem={subMenu}/>)
+            })
+          }
         </div>
       </div>
     </div>

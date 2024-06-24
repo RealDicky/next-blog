@@ -3,23 +3,19 @@ import { useEffect, useState } from 'react'
 import { useNotes } from '../../hooks/useNotes'
 import { MenuItemType } from '@/app/components/menu/types'
 import Link from 'next/link'
-// Using ES6 import syntax
-import hljs from 'highlight.js/lib/core'
-import javascript from 'highlight.js/lib/languages/javascript'
+import notePath from '../../../../notePath.json'
 
-// Then register the languages you need
-hljs.registerLanguage('javascript', javascript)
-
-function isFile (file: MenuItemType) {
-  return !file.children && file.path.includes('.')
-}
-
-const Post = () => {
-  const [notes, setNotes] = useState<MenuItemType[]>([])
+const Post = ({ params }: { params: { postName: string } }) => {
+  const post = notePath.find(note => note.name === decodeURIComponent(params.postName))
+  if (!post) {
+    // TODO
+    return <div>404</div>
+  }
+  const [posts, setPosts] = useState<MenuItemType[]>([])
   const [showDir, setShowDir] = useState(true)
   const [note, setNote] = useState('')
   const loadNote = async () => {
-    const note = await import(/* webpackMode: "eager" */ `../../../../note${decodeURIComponent(location.pathname).split('note')[1]}`)
+    const note = await import(/* webpackMode: "eager" */ `../../../../note${post.path.split('note')[1]}`)
 
     setNote(note.default)
   }
@@ -30,7 +26,7 @@ const Post = () => {
 
   useEffect(() => {
     if (showDir) {
-      setNotes(useNotes().filter(isFile))
+      setPosts(useNotes('FILE'))
     } else {
       loadNote()
     }
@@ -44,8 +40,8 @@ const Post = () => {
 
   if (showDir) {
     return (
-      <div className='max-w-screen-xl mx-auto pt-6'>
-        {notes.map(note => (
+      <div>
+        {posts.map(note => (
           <div key={note.name} className='mt-2'>
             <Link href={note.path.slice(1)} className='text-xl hover:text-red-500'>{note.name}</Link>
           </div>
@@ -54,7 +50,7 @@ const Post = () => {
     )
   }
 
-  return <div className='px-20 pt-6' id="note-container"></div>
+  return <div id="note-container" className='max-w-screen-md'></div>
 }
 
 export default Post

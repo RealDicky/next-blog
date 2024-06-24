@@ -4,20 +4,27 @@ import path from 'path'
 const outputFile = 'notePath.json'
 
 function usePostDir (dir) {
+  const result = []
   const getPostDir = (path) => {
     const files = fs.readdirSync(path)
-    return files.map(filename => {
+    files.forEach(filename => {
+      if (filename.startsWith('.')) return
       const stat = fs.statSync(path + '/' + filename)
-      const children = stat.isDirectory() ? getPostDir(path + '/' + filename) : undefined
-      return {
-        name: filename,
-        path: `${path}/${filename}`,
-        url: path,
-        children
+      if (stat.isDirectory()) {
+        getPostDir(path + '/' + filename)
+      } else {
+        result.push({
+          name: filename,
+          path: `${path}/${filename}`,
+          tags: path.split(dir)[1].split('/').filter(Boolean),
+          createAt: stat.ctime,
+          updateAt: stat.mtime
+        })
       }
-    }).filter(file => !file.name.startsWith('.'))
+    })
   }
-  return getPostDir(dir)
+  getPostDir(dir)
+  return result
 }
 
 const content = JSON.stringify(usePostDir('./note'))

@@ -1,16 +1,20 @@
-'use client'
-import { useEffect } from 'react'
-import notePath from '../../../../notePath.json'
-
 import Menu from '@/app/components/menu/Menu'
+import { menus } from './const'
+import Link from 'next/link'
 
 const AppHeader = () => {
-  useEffect(() => {
-  })
-
   return (
-    <div className="pt-4 pb-2 border-b">
-      <Menu menus={notePath} />
+    <div className="pt-4 border-b">
+      <div className='flex px-6 max-w-screen-xl mx-auto items-center'>
+        <Link href='/'>ZBlog</Link>
+        <div className='ml-auto'>
+          <Menu menus={menus} />
+        </div>
+        <div className='border px-12 py-1 rounded-full'>
+          {/* TODO */}
+          search
+        </div>
+      </div>
     </div>
   )
 }

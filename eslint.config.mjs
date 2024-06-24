@@ -27,7 +27,8 @@ export default [
   {
     rules: {
       'react/react-in-jsx-scope': 0,
-      'no-undef': 0
+      'no-undef': 0,
+      'react/jsx-indent': [2, 2]
       // 'react/prop-types': 0
     }
   }

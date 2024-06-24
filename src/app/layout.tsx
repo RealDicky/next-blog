@@ -19,7 +19,11 @@ export default function RootLayout ({
     <html lang="en">
       <body className={inter.className}>
         <AppHeader />
-        {children}
+        <main className='flex max-w-screen-xl mx-auto' style={{ height: 'calc(100vh - 59px)' }}>
+          <div className='ml-[5%] mt-8'>
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   )
