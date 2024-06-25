@@ -3,9 +3,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import Head from 'next/head'
 import LoadHighlight from './LoadHighlight'
 import React from 'react'
-import Link from 'next/link'
 
-const Post = async ({ params, searchParams }: { params: { postName: string }, searchParams: { from: string } }) => {
+const Post = async ({ params }: { params: { postName: string } }) => {
   const post = notePath.find(note => {
     return note.name.includes(params.postName) || note.name.includes(decodeURIComponent(params.postName))
   })

@@ -21,6 +21,7 @@ html, body {
   height: 100vh;
   line-height: 2.5rem;
   background: aliceblue;
+  transition: all 0.3s;
 }
 
 body {
@@ -30,6 +31,8 @@ body {
 .app-header, main {
   font-family: zFont-code,zFont;
   background: aliceblue;
+  transition: all 0.3s;
+
 }
 .app-header {
   z-index: 1;
@@ -64,4 +67,10 @@ p {
 
 code {
   line-height: 1.75rem;
+}
+
+body.dark, body.dark .app-header, body.dark main {
+  background: #292929;
+  color: #FFF;
+  transition: all 0.3s;
 }

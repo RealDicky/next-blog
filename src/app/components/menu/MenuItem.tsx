@@ -21,7 +21,7 @@ const MenuItem: FC<{menuItem: MenuItemType}> = (props) => {
   return (
     <div className='w-24  cursor-pointer flex' onMouseEnter={() => setShowSub(true)} onMouseLeave={() => setShowSub(false)}>
       <div className='justify-center items-center flex-1 relative'>
-        <Link className={`py-2 px-4 hover:text-blue-500 text-center w-full ${isActive(menuItem) ? 'border-b-2 border-slate-500' : ''}`} href={menuItem.path} onClick={handleClickMenu}>{menuItem.name}</Link>
+        <Link className={`py-2 px-4 hover:text-blue-500 text-center w-full ${isActive(menuItem) ? 'border-b-2 border-blue-500 text-blue-500' : ''}`} href={menuItem.path} onClick={handleClickMenu}>{menuItem.name}</Link>
         <div
           className='absolute w-auto top-[2.75rem]'
           style={{
