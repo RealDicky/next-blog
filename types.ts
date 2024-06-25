@@ -4,4 +4,5 @@ export interface NotePath {
   tags: string[]
   createAt: string
   updateAt: string
+  content: string
 }

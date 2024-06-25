@@ -18,7 +18,8 @@ function usePostDir (dir) {
           path: `${path}/${filename}`,
           tags: path.split(dir)[1].split('/').filter(Boolean),
           createAt: stat.ctime,
-          updateAt: stat.mtime
+          updateAt: stat.mtime,
+          content: filename.includes('.md') ? fs.readFileSync(path + '/' + filename, 'utf-8') : ''
         })
       }
     })

@@ -27,12 +27,14 @@ const tags = notePath.reduce<Record<string, Tag>>((result: Record<string, Tag>, 
 }, {})
 
 const Tags = () => {
-  console.log({ tags })
-
   return (
     <div>
       {
-        Object.values(tags).map(tag => <Link href={`/tags/${tag.name}`} key={tag.name}>{tag.name}（{tag.nums}）</Link>)
+        Object.values(tags).map(tag => (
+          <div key={tag.name} className='pb-2'>
+            <Link className='hover:text-blue-500' href={`/tags/${tag.name}`}>{tag.name}（{tag.nums}）</Link>
+          </div>
+        ))
       }
     </div>
   )

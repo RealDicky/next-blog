@@ -1,56 +1,40 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { useNotes } from '../../hooks/useNotes'
-import { MenuItemType } from '@/app/components/menu/types'
-import Link from 'next/link'
 import notePath from '../../../../notePath.json'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import Head from 'next/head'
+import LoadHighlight from './LoadHighlight'
+import React from 'react'
+import Link from 'next/link'
 
-const Post = ({ params }: { params: { postName: string } }) => {
-  const post = notePath.find(note => note.name === decodeURIComponent(params.postName))
+const Post = async ({ params, searchParams }: { params: { postName: string }, searchParams: { from: string } }) => {
+  const post = notePath.find(note => {
+    return note.name.includes(params.postName) || note.name.includes(decodeURIComponent(params.postName))
+  })
+  const isMd = post?.name.endsWith('.md')
+
   if (!post) {
     // TODO
-    return <div>404</div>
+    return 404
   }
-  const [posts, setPosts] = useState<MenuItemType[]>([])
-  const [showDir, setShowDir] = useState(true)
-  const [note, setNote] = useState('')
-  const loadNote = async () => {
-    const note = await import(/* webpackMode: "eager" */ `../../../../note${post.path.split('note')[1]}`)
+  const postContent = isMd ? (post?.content || '') : (await import(/* webpackMode: "eager" */ `../../../../note${post?.path.split('note')[1]}`))?.default
 
-    setNote(note.default)
-  }
-
-  useEffect(() => {
-    setShowDir(!location.pathname.includes('.'))
-  }, [])
-
-  useEffect(() => {
-    if (showDir) {
-      setPosts(useNotes('FILE'))
-    } else {
-      loadNote()
-    }
-  }, [showDir])
-
-  useEffect(() => {
-    const container = document.getElementById('note-container')
-    if (!container) return
-    container!.innerHTML = note
-  }, [note])
-
-  if (showDir) {
+  if (isMd) {
     return (
-      <div>
-        {posts.map(note => (
-          <div key={note.name} className='mt-2'>
-            <Link href={note.path.slice(1)} className='text-xl hover:text-red-500'>{note.name}</Link>
-          </div>
-        ))}
+      <div className='pb-4 relative'>
+        <Head>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"></link>
+        </Head>
+        <LoadHighlight />
+        <div className='max-w-screen-md'>
+          <MDXRemote source={postContent} />
+        </div>
       </div>
     )
   }
-
-  return <div id="note-container" className='max-w-screen-md'></div>
+  return (
+    <div className='max-w-screen-md pb-4 relative'>
+      <div dangerouslySetInnerHTML={{ __html: postContent }}></div>
+    </div>
+  )
 }
 
 export default Post

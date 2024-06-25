@@ -2,7 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'zFont';
+  src: url('../app/static/font/fzzyjt.ttf');
+}
+
+@font-face {
+  font-family: 'zFont-code';
+  src: url('../app/static/font/FiraCode-Medium.ttf');
+}
+
+html {
+  overflow: hidden;
+}
+
 html, body {
   width: 100vw;
   height: 100vh;
+  line-height: 2.5rem;
+  background: aliceblue;
+}
+
+body {
+  overflow-y: auto;
+}
+
+.app-header, main {
+  font-family: zFont-code,zFont;
+  background: aliceblue;
+}
+.app-header {
+  z-index: 1;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.125rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+} 
+
+pre:has(code) {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+code {
+  line-height: 1.75rem;
 }
