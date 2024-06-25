@@ -34,8 +34,8 @@ export default function Home ({ searchParams }: {searchParams: {page: string}}) 
                 <Link
                   key={_page}
                   href={`/?page=${_page}`}
-                  className='mx-2 text-gray-400 hover:text-black'
-                  style={page === _page ? { color: 'black' } : {}}
+                  className='mx-2 text-gray-400 hover:text-blue-500'
+                  style={page === _page ? { color: '#3b82f6' } : {}}
                 >
                   {_page}
                 </Link>
