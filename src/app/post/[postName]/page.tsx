@@ -14,7 +14,7 @@ const Post = async ({ params }: { params: { postName: string } }) => {
     // TODO
     return 404
   }
-  const postContent = isMd ? (post?.content || '') : (await import(/* webpackMode: "eager" */ `../../../../note${post?.path.split('note')[1]}`))?.default
+  const postContent = isMd ? (post?.content || '') : (await import(/* webpackMode: "eager" */ `../../../../znote${post?.path.split('note')[1]}`))?.default
 
   if (isMd) {
     return (
