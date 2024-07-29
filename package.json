@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ./scripts/getRoutes.mjs && next dev",
-    "build": "node ./scripts/getRoutes.mjs && next build",
+    "clone": "node ./scripts/getNotes.mjs",
+    "dev": "npm run clone && node ./scripts/getRoutes.mjs && next dev",
+    "build": "npm run clone && node ./scripts/getRoutes.mjs && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -31,6 +32,7 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "autoprefixer": "^10.4.19",
+    "dotenv": "^16.4.5",
     "eslint": "^9.3.0",
     "eslint-config-next": "14.2.3",
     "eslint-config-standard-with-typescript": "^43.0.1",
