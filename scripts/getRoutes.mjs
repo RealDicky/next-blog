@@ -6,6 +6,7 @@ const outputFile = 'notePath.json'
 function usePostDir (dir) {
   const result = []
   const { password: commonPassword, private: privateNotes } = JSON.parse(fs.readFileSync(`${dir}/.secret`, 'utf-8'))
+  console.log({ commonPassword })
   const getPostDir = (path) => {
     const files = fs.readdirSync(path)
     files.forEach(filename => {
