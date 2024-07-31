@@ -5,4 +5,5 @@ export interface NotePath {
   createAt: string
   updateAt: string
   content: string
+  password: string
 }
