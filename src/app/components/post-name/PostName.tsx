@@ -1,8 +1,8 @@
 'use client'
+import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 import { NotePath } from '../../../../types'
-import { Icon } from '@iconify/react'
 import BaseModal from '../base-modal/BaseModal'
 
 const CACHE_KEY = 'notePassword'
