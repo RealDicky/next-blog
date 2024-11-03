@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "clone": "node ./scripts/getNotes.mjs",
-    "dev": "npm run clone && node ./scripts/getRoutes.mjs && next dev",
-    "build": "npm run clone && node ./scripts/getRoutes.mjs && next build",
+    "dev": "node ./scripts/getRoutes.mjs && next dev",
+    "build": "node ./scripts/getRoutes.mjs && next build",
     "start": "next start",
     "lint": "next lint"
   },

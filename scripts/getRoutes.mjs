@@ -34,5 +34,5 @@ function usePostDir (dir) {
   return result
 }
 
-const content = JSON.stringify(usePostDir('./znote'))
+const content = JSON.stringify(usePostDir('./note'))
 fs.writeFileSync(path.resolve('./', outputFile), content)
